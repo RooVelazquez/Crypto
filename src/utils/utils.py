@@ -3,6 +3,7 @@ import pandas as pd
 import streamlit as st
 from models.ml_models import Models
 
+'''
 def get_csv_file(file_name):
     
     # Get the current working directory
@@ -17,6 +18,15 @@ def get_csv_file(file_name):
     csv_file_location = os.path.join(current_directory, "data", file_name)
 
     return csv_file_location
+    '''
+def get_csv_file(file_name):
+    # Define the relative path to the CSV file from the src directory
+    file_path = os.path.join(os.path.dirname(__file__), '..', 'data', file_name)
+    
+    # Normalize the file path to resolve any .. components
+    file_path = os.path.normpath(file_path)
+    
+    return file_path
 
 def get_data(file_name):
     """return data as data frame"""
