@@ -19,7 +19,7 @@ def get_csv_file(file_name):
 
     return csv_file_location
 
-
+'''
 def get_data(file_name):
     path = '/workspaces/Crypto/data/' + file_name  # Direct absolute path
 
@@ -34,6 +34,23 @@ def get_data(file_name):
         dataframe = pd.read_csv(file_name)
         print(f"An error occurred when attempting to open/read the file: {e}")
         return dataframe
+        '''
+def get_data(file_name):
+    # Use an absolute path for the file or ensure the relative path is correct from the current working directory
+    file_path = os.path.join(os.path.dirname(__file__), '..', 'data', file_name)
+    file_path = os.path.normpath(file_path)
+
+    # Check and print the absolute path for debugging
+    absolute_file_path = os.path.abspath(file_path)
+    print(f"Absolute file path: {absolute_file_path}")
+
+    if os.path.exists(absolute_file_path):
+        dataframe = pd.read_csv(absolute_file_path)
+        print("File successfully loaded.")
+        return dataframe
+    else:
+        print(f"File not found at: {absolute_file_path}")
+        return None
 
 
 def get_specific_data(data_frame: pd.DataFrame, crypto_name:str):
