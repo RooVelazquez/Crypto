@@ -3,7 +3,6 @@ import pandas as pd
 import streamlit as st
 from models.ml_models import Models
 
-'''
 def get_csv_file(file_name):
     
     # Get the current working directory
@@ -18,7 +17,8 @@ def get_csv_file(file_name):
     csv_file_location = os.path.join(current_directory, "data", file_name)
 
     return csv_file_location
-    '''
+
+
 def get_data(file_name):
     path = '/workspaces/Crypto/data/' + file_name  # Direct absolute path
 
@@ -31,6 +31,7 @@ def get_data(file_name):
             return dataframe
     except Exception as e:
         print(f"An error occurred when attempting to open/read the file: {e}")
+
 
 def get_specific_data(data_frame: pd.DataFrame, crypto_name:str):
     """return data for specific crypto"""
