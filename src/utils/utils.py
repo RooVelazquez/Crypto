@@ -19,14 +19,18 @@ def get_csv_file(file_name):
 
     return csv_file_location
     '''
-def get_csv_file(file_name):
-    # Define the relative path to the CSV file from the src directory
-    file_path = os.path.join(os.path.dirname(__file__), '..', 'data', file_name)
-    
-    # Normalize the file path to resolve any .. components
-    file_path = os.path.normpath(file_path)
-    
-    return file_path
+def get_data(file_name):
+    path = '/workspaces/Crypto/data/' + file_name  # Direct absolute path
+
+    try:
+        with open(path, 'r') as file:
+            print(f"Successfully opened the file: {path}")
+            # If the file opens successfully, then attempt to read it as a CSV
+            dataframe = pd.read_csv(file)
+            print("File successfully loaded as dataframe.")
+            return dataframe
+    except Exception as e:
+        print(f"An error occurred when attempting to open/read the file: {e}")
 
 def get_data(file_name):
     """return data as data frame"""
