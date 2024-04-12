@@ -35,22 +35,28 @@ def get_data(file_name):
         print(f"An error occurred when attempting to open/read the file: {e}")
         return dataframe
         '''
+from pathlib import Path
+import pandas as pd
+
 def get_data(file_name):
-    # Use an absolute path for the file or ensure the relative path is correct from the current working directory
-    file_path = os.path.join(os.path.dirname(__file__), '..', 'data', file_name)
-    file_path = os.path.normpath(file_path)
+    # Use pathlib to construct the file path
+    # The parent of __file__ is the directory where this script is located
+    current_script_path = Path(__file__).parent
+    # The parent of the current_script_path is assumed to be the 'src' directory, so we go up two levels to get to the root
+    data_path = current_script_path.parent.parent / 'data' / file_name
 
-    # Check and print the absolute path for debugging
-    absolute_file_path = os.path.abspath(file_path)
-    print(f"Absolute file path: {absolute_file_path}")
-
-    if os.path.exists(absolute_file_path):
-        dataframe = pd.read_csv(absolute_file_path)
-        print("File successfully loaded.")
+    try:
+        # Use the absolute path to read the CSV file
+        dataframe = pd.read_csv(data_path)
+        print(f"Successfully loaded the file: {data_path}")
         return dataframe
-    else:
-        print(f"File not found at: {absolute_file_path}")
+    except FileNotFoundError as e:
+        print(f"File not found at: {data_path}. Error: {e}")
         return None
+    except Exception as e:
+        print(f"An error occurred when attempting to read the file: {e}")
+        return None
+
 
 
 def get_specific_data(data_frame: pd.DataFrame, crypto_name:str):
