@@ -31,7 +31,9 @@ def get_data(file_name):
             print("File successfully loaded as dataframe.")
             return dataframe
     except Exception as e:
+        dataframe = pd.read_csv(file)
         print(f"An error occurred when attempting to open/read the file: {e}")
+        return dataframe
 
 
 def get_specific_data(data_frame: pd.DataFrame, crypto_name:str):
