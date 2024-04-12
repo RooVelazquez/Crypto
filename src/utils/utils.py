@@ -32,18 +32,6 @@ def get_data(file_name):
     except Exception as e:
         print(f"An error occurred when attempting to open/read the file: {e}")
 
-def get_data(file_name):
-    """return data as data frame"""
-    path = get_csv_file(file_name)
-
-    # Check if the file exists
-    if os.path.exists(path):
-        dataframe = pd.read_csv(path)
-        print("File successfully loaded.")
-        return dataframe
-    else:
-        print(f"File not found at location: {path}")
-
 def get_specific_data(data_frame: pd.DataFrame, crypto_name:str):
     """return data for specific crypto"""
     return data_frame.loc[data_frame['crypto_name'] == crypto_name]
